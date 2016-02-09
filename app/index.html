@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="YellowHammerApp">
+<head>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../bower_components/angular/angular-csp.css" rel="stylesheet">
+  <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../bower_components/nprogress/nprogress.css" rel="stylesheet"></script>
+  <link href="./styles/app.css" rel="stylesheet">
+  <title>YH Challenge</title>
+</head>
+  <body>
+    <div class="page-header container">
+      <h1>&nbsp;<span class="glyphicon glyphicon-cloud logo"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;File Crudder <small>Made with AngularJS</small></h1>
+    </div>
+    <div class="container">
+      <form ng-controller="uploader" ng-submit="upload()"><br>
+        <label for="exampleInputFile">File input</label>
+        <input id="exampleInputFile" type="file"
+        file-input="files"
+        multiple/><br>
+        <button type="submit" class="btn btn-primary align-right">
+          <span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;Upload
+        </button><br><br>
+        <div class="panel panel-info">
+          <div class="panel-heading">Uploaded Files</div>
+          <div class="panel-body">
+            <ul class="list-unstyled">
+              <li ng-repeat="file in files">{{file.name}}</li><br>
+              <a href="" ng-show="sortShow" ng-click="predicate = 'name'; reverse=false">
+                <span style="font-size: 1.5em" class="glyphicon glyphicon-sort-by-alphabet"></span>
+              </a>
+              <a href="" ng-show="sortShow" ng-click="predicate = '-name'; reverse=false">
+                <span style="font-size: 1.5em" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+              </a>
+              <li ng-repeat="uploadedFile in uploadedFiles | orderBy:predicate:reverse"  id="uploadedFilesList" class="list-group-item container-fluid">
+                <a href="{{'http://yh.interview.s3.amazonaws.com/' + uploadedFile.Key}}" ng-hide="editing">
+                  <span>{{uploadedFile.name}}</span>
+                </a>
+                <form ng-show="editing" ng-submit="editing = false">
+                  <input ng-show="editing" type="text" ng-model="uploadedFile.name" placeholder="{{uploadedFile.name}}" ng-required/>
+                  <button class="btn btn-danger float-right disabled" ng-hide="editing" ng-click="delete()">
+                    <span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
+                  </button>
+                  <a href="{{'http://yh.interview.s3.amazonaws.com/' + uploadedFile.Key}}" class="btn btn-success float-right disabled" ng-hide="editing" download>
+                    <span class="glyphicon glyphicon-cloud-download"></span>&nbsp;Download
+                  </a>
+                  <button class="btn btn-info float-right disabled" ng-hide="editing" ng-click="editing = true">
+                    <span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit
+                  </button>
+                  <a class="btn btn-warning float-right disabled" href="{{'http://yh.interview.s3.amazonaws.com/' + uploadedFile.Key}}" ng-hide="editing" target="iframe_a">
+                    <span class="glyphicon glyphicon-eye-open"></span>&nbsp;Preview
+                  </a>
+                  <button ng-show="editing" ng-click="editing = false" class="btn btn-success" type="submit">
+                    <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Save
+                  </button>
+                </form>
+              </li>
+            </ul>
+          </div>
+        </form>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe id="iframetag" class="embed-responsive-item" name="iframe_a" seamless></iframe>
+        </div>
+      </div>
+    </div>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.27.min.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../bower_components/nprogress/nprogress.js"></script>
+    <script src="scripts/app.js"></script>
+  </body>
+</html>
+
+
+
+

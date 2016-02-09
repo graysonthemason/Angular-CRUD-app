@@ -3,12 +3,12 @@
 
 _artist: Michael Firman http://www.firmanproductions.com/_
 
-We're looking for full-stack developers that are hungry to learn and can deliver functioning products. You got this far because we think you have those qualities, so now it's time to prove it. Your task is to write a simple AngularJS application that allows CRUD (create, read, update, delete). You can use the skeleton provided here (but please make a new repository instead of forking this one) or start from scratch. 
+We're looking for full-stack developers that are hungry to learn and can deliver functioning products. You got this far because we think you have those qualities, so now it's time to prove it. Your task is to write a simple AngularJS application that allows CRUD (create, read, update, delete). You can use the skeleton provided here (but please make a new repository instead of forking this one) or start from scratch.
 
 #### Requirements
 The application should accomplish the following tasks:
 - A user can upload a file through the web browser (create)
-- A user can view a list of all the files they have uploaded (read) 
+- A user can view a list of all the files they have uploaded (read)
 - A user can download any file that they have previously uploaded (read)
 - A user can change the name of a file they have uploaded (update)
 - A user can delete a file that they have uploaded (delete)
@@ -23,7 +23,7 @@ This should be a challenging exercise on its own, but if you are absolutely crus
   - extra features -- sorting (by file name, file size, file type, etc); allow a user to add category to their upload and to organize their list by categories; drag-and-drop; file preview thumbnails; something else you think would be cool!
   - put it in a Docker image: [https://docs.docker.com/](https://docs.docker.com/)
 
-It's very likely that you can learn the required Angular in a couple of hours. We want to respect your time, so we'll take a look at incomplete submissions. Code quality matters a lot more than code quantity. The end goal is a product that works and is easy to use. By the way, this is a simplified version of a real task that we are currently working on, so hopefully this gives you an idea of whether you'd like coming to work at Yellowhammer. 
+It's very likely that you can learn the required Angular in a couple of hours. We want to respect your time, so we'll take a look at incomplete submissions. Code quality matters a lot more than code quantity. The end goal is a product that works and is easy to use. By the way, this is a simplified version of a real task that we are currently working on, so hopefully this gives you an idea of whether you'd like coming to work at Yellowhammer.
 
 ---------------
 ## What We're Looking For (roughly in order of importance)
@@ -44,7 +44,7 @@ We set up an Amazon S3 (Simple Storage Service) bucket for you to work with. Lea
 2) in your application, include these configs
 ```javascript
 AWS.config.update({
-    accessKeyId:     '<ACCESS KEY ID>', 
+    accessKeyId:     '<ACCESS KEY ID>',
     secretAccessKey: '<SECRET KEY>' // replace these credentials with the keys provided to you
   });
 ```
@@ -53,15 +53,15 @@ AWS.config.update({
 
 ```javascript
 // set up the bucket object
-var bucket = new AWS.S3({params: {Bucket: 'yh.interview'}}) 
+var bucket = new AWS.S3({params: {Bucket: 'yh.interview'}})
 // add a file
 bucket.putObject({
   Key: "YOURNAME/someCoolGif.gif", // this is basically the filename -- replace YOURNAME with your first and last name, lowercase, no spaces
   ACL: "public-read", // must include this exactly as is, this is what allows you to get the uploaded file from your browser
   Body: "some text or an encoded image or something" // this is the content of the file
-  }, function(err, data) { // optional -- this is the callback that is executed when the operation is complete; 
+  }, function(err, data) { // optional -- this is the callback that is executed when the operation is complete;
                            // highly recommended -- it will be nice to know when it has worked and when it has failed;
-                           // the user will probably want to know, too 
+                           // the user will probably want to know, too
     if (err) {
       console.log(err);
     }
@@ -89,7 +89,7 @@ bucket.listObjects({
                       //   ],
                       //   IsTruncated: false,
                       //   Marker: "",
-                      //   MaxKeys: 1000, 
+                      //   MaxKeys: 1000,
                       //   Name: "yh.interview",
                       //   Prefix: "YOURNAME"
                       // }
@@ -98,17 +98,17 @@ bucket.listObjects({
   }
 });
 ```
-You can access your uploads with a URL: http://yh.interview.s3.amazon.com/YOURNAME/filename.jpg. You could, for example, use it in an anchor tag or as the src attribute in an img tag: 
+You can access your uploads with a URL: http://yh.interview.s3.amazon.com/grayreinhard/filename.jpg. You could, for example, use it in an anchor tag or as the src attribute in an img tag:
 ```html
 <img src="http://yh.interview.s3.amazon.com/YOURNAME/filename.jpg">
 ```
 
-A question to think about: what if we want to change our service provider? How can we minimize the impact to our application (i.e. change the least amount of code) if we decide to not use AWS anymore? Do not hesitate to get in touch with us if you have questions about this or something doesn't work for you. 
+A question to think about: what if we want to change our service provider? How can we minimize the impact to our application (i.e. change the least amount of code) if we decide to not use AWS anymore? Do not hesitate to get in touch with us if you have questions about this or something doesn't work for you.
 
 ---------------
 ## Resources
 
-- You'll have to spend some time learning the basics of Angular. Their tutorial is good: [https://docs.angularjs.org/tutorial](https://docs.angularjs.org/tutorial). 
+- You'll have to spend some time learning the basics of Angular. Their tutorial is good: [https://docs.angularjs.org/tutorial](https://docs.angularjs.org/tutorial).
 - Egghead.io Angular screencasts: [https://egghead.io/series/angularjs-app-from-scratch-getting-started](https://egghead.io/series/angularjs-app-from-scratch-getting-started)
 - npm: [npmjs.org](https://www.npmjs.org). Use libraries. Find the right tool for the job.
 - AWS Javascript SDK: [http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html). Go nuts.

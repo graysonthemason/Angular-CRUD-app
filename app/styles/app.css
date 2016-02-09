@@ -1,0 +1,38 @@
+html, body {
+  background-color: LightSlateGrey;
+}
+
+div {
+  position: relative;
+  background-color: white;
+}
+
+.hide {
+  display: none;
+}
+
+iframe {
+  width: 100%;
+}
+
+.float-right {
+  float: right;
+}
+
+.logo {
+  font-size: 1.9em;
+  position: absolute;
+  top: 10px;
+}
+
+.page-header {
+  margin-top: 10px;
+}
+
+.list-group-item {
+  padding: 2px;
+}
+
+button, a {
+  margin-left: 2px;
+}
